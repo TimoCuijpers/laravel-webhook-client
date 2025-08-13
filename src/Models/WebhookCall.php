@@ -1,19 +1,19 @@
 <?php
 
-namespace Spatie\WebhookClient\Models;
+namespace TimoCuijpers\WebhookClient\Models;
 
 use Exception;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\MassPrunable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
-use Spatie\WebhookClient\Exceptions\InvalidConfig;
-use Spatie\WebhookClient\WebhookConfig;
+use TimoCuijpers\WebhookClient\Exceptions\InvalidConfig;
+use TimoCuijpers\WebhookClient\WebhookConfig;
 use Symfony\Component\HttpFoundation\HeaderBag;
 
 /**
  * Class WebhookCall
- * @package Spatie\WebhookClient\Models
+ * @package TimoCuijpers\WebhookClient\Models
  *
  * @property-read int $id
  * @property string $name

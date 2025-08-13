@@ -1,10 +1,10 @@
 <?php
 
-namespace Spatie\WebhookClient\Tests;
+namespace TimoCuijpers\WebhookClient\Tests;
 
 use Orchestra\Testbench\TestCase as Orchestra;
 use Spatie\LaravelRay\RayServiceProvider;
-use Spatie\WebhookClient\WebhookClientServiceProvider;
+use TimoCuijpers\WebhookClient\WebhookClientServiceProvider;
 
 class TestCase extends Orchestra
 {

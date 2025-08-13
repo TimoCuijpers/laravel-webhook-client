@@ -1,9 +1,9 @@
 <?php
 
-namespace Spatie\WebhookClient\Tests\TestClasses;
+namespace TimoCuijpers\WebhookClient\Tests\TestClasses;
 
 use Illuminate\Http\Request;
-use Spatie\WebhookClient\WebhookProfile\WebhookProfile;
+use TimoCuijpers\WebhookClient\WebhookProfile\WebhookProfile;
 
 class ProcessNothingWebhookProfile implements WebhookProfile
 {

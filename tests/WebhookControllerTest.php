@@ -4,16 +4,16 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\Facades\Route;
-use Spatie\WebhookClient\Events\InvalidWebhookSignatureEvent;
-use Spatie\WebhookClient\Models\WebhookCall;
-use Spatie\WebhookClient\Tests\TestClasses\CustomRespondsToWebhook;
-use Spatie\WebhookClient\Tests\TestClasses\EverythingIsValidSignatureValidator;
-use Spatie\WebhookClient\Tests\TestClasses\NothingIsValidSignatureValidator;
-use Spatie\WebhookClient\Tests\TestClasses\ProcessNothingWebhookProfile;
-use Spatie\WebhookClient\Tests\TestClasses\ProcessWebhookJobTestClass;
-use Spatie\WebhookClient\Tests\TestClasses\WebhookModelWithoutPayloadSaved;
-use Spatie\WebhookClient\WebhookConfig;
-use Spatie\WebhookClient\WebhookConfigRepository;
+use TimoCuijpers\WebhookClient\Events\InvalidWebhookSignatureEvent;
+use TimoCuijpers\WebhookClient\Models\WebhookCall;
+use TimoCuijpers\WebhookClient\Tests\TestClasses\CustomRespondsToWebhook;
+use TimoCuijpers\WebhookClient\Tests\TestClasses\EverythingIsValidSignatureValidator;
+use TimoCuijpers\WebhookClient\Tests\TestClasses\NothingIsValidSignatureValidator;
+use TimoCuijpers\WebhookClient\Tests\TestClasses\ProcessNothingWebhookProfile;
+use TimoCuijpers\WebhookClient\Tests\TestClasses\ProcessWebhookJobTestClass;
+use TimoCuijpers\WebhookClient\Tests\TestClasses\WebhookModelWithoutPayloadSaved;
+use TimoCuijpers\WebhookClient\WebhookConfig;
+use TimoCuijpers\WebhookClient\WebhookConfigRepository;
 
 beforeEach(function () {
     config()->set('webhook-client.configs.0.signing_secret', 'abc123');

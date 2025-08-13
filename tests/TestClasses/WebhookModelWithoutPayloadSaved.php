@@ -1,10 +1,10 @@
 <?php
 
-namespace Spatie\WebhookClient\Tests\TestClasses;
+namespace TimoCuijpers\WebhookClient\Tests\TestClasses;
 
 use Illuminate\Http\Request;
-use Spatie\WebhookClient\Models\WebhookCall;
-use Spatie\WebhookClient\WebhookConfig;
+use TimoCuijpers\WebhookClient\Models\WebhookCall;
+use TimoCuijpers\WebhookClient\WebhookConfig;
 
 class WebhookModelWithoutPayloadSaved extends WebhookCall
 {

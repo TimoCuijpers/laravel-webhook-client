@@ -1,12 +1,12 @@
 <?php
 
-use Spatie\WebhookClient\Exceptions\InvalidConfig;
-use Spatie\WebhookClient\Models\WebhookCall;
-use Spatie\WebhookClient\SignatureValidator\DefaultSignatureValidator;
-use Spatie\WebhookClient\Tests\TestClasses\ProcessWebhookJobTestClass;
-use Spatie\WebhookClient\WebhookConfig;
-use Spatie\WebhookClient\WebhookProfile\ProcessEverythingWebhookProfile;
-use Spatie\WebhookClient\WebhookResponse\DefaultRespondsTo;
+use TimoCuijpers\WebhookClient\Exceptions\InvalidConfig;
+use TimoCuijpers\WebhookClient\Models\WebhookCall;
+use TimoCuijpers\WebhookClient\SignatureValidator\DefaultSignatureValidator;
+use TimoCuijpers\WebhookClient\Tests\TestClasses\ProcessWebhookJobTestClass;
+use TimoCuijpers\WebhookClient\WebhookConfig;
+use TimoCuijpers\WebhookClient\WebhookProfile\ProcessEverythingWebhookProfile;
+use TimoCuijpers\WebhookClient\WebhookResponse\DefaultRespondsTo;
 
 it('can handle a valid configuration', function () {
     $configArray = getValidConfig();

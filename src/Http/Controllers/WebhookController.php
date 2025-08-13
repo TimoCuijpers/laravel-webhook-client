@@ -1,10 +1,10 @@
 <?php
 
-namespace Spatie\WebhookClient\Http\Controllers;
+namespace TimoCuijpers\WebhookClient\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Spatie\WebhookClient\WebhookConfig;
-use Spatie\WebhookClient\WebhookProcessor;
+use TimoCuijpers\WebhookClient\WebhookConfig;
+use TimoCuijpers\WebhookClient\WebhookProcessor;
 
 class WebhookController
 {

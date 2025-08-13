@@ -1,10 +1,10 @@
 <?php
 
-namespace Spatie\WebhookClient\Tests\TestClasses;
+namespace TimoCuijpers\WebhookClient\Tests\TestClasses;
 
 use Illuminate\Http\Request;
-use Spatie\WebhookClient\WebhookConfig;
-use Spatie\WebhookClient\WebhookResponse\RespondsToWebhook;
+use TimoCuijpers\WebhookClient\WebhookConfig;
+use TimoCuijpers\WebhookClient\WebhookResponse\RespondsToWebhook;
 use Symfony\Component\HttpFoundation\Response;
 
 class CustomRespondsToWebhook implements RespondsToWebhook

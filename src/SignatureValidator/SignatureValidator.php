@@ -1,9 +1,9 @@
 <?php
 
-namespace Spatie\WebhookClient\SignatureValidator;
+namespace TimoCuijpers\WebhookClient\SignatureValidator;
 
 use Illuminate\Http\Request;
-use Spatie\WebhookClient\WebhookConfig;
+use TimoCuijpers\WebhookClient\WebhookConfig;
 
 interface SignatureValidator
 {

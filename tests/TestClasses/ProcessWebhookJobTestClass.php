@@ -1,8 +1,8 @@
 <?php
 
-namespace Spatie\WebhookClient\Tests\TestClasses;
+namespace TimoCuijpers\WebhookClient\Tests\TestClasses;
 
-use Spatie\WebhookClient\Jobs\ProcessWebhookJob;
+use TimoCuijpers\WebhookClient\Jobs\ProcessWebhookJob;
 
 class ProcessWebhookJobTestClass extends ProcessWebhookJob
 {

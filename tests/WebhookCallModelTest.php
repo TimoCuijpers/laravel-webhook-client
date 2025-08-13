@@ -3,19 +3,19 @@
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
-use Spatie\WebhookClient\Models\WebhookCall;
-use Spatie\WebhookClient\WebhookConfig;
+use TimoCuijpers\WebhookClient\Models\WebhookCall;
+use TimoCuijpers\WebhookClient\WebhookConfig;
 
 beforeEach(function () {
     $this->webhookConfig = new WebhookConfig([
         'name' => 'test',
         'signing_secret' => 'secret',
         'signature_header_name' => 'Signature',
-        'signature_validator' => \Spatie\WebhookClient\SignatureValidator\DefaultSignatureValidator::class,
-        'webhook_profile' => \Spatie\WebhookClient\WebhookProfile\ProcessEverythingWebhookProfile::class,
-        'webhook_response' => \Spatie\WebhookClient\WebhookResponse\DefaultRespondsTo::class,
+        'signature_validator' => \TimoCuijpers\WebhookClient\SignatureValidator\DefaultSignatureValidator::class,
+        'webhook_profile' => \TimoCuijpers\WebhookClient\WebhookProfile\ProcessEverythingWebhookProfile::class,
+        'webhook_response' => \TimoCuijpers\WebhookClient\WebhookResponse\DefaultRespondsTo::class,
         'webhook_model' => WebhookCall::class,
-        'process_webhook_job' => \Spatie\WebhookClient\Tests\TestClasses\ProcessWebhookJobTestClass::class,
+        'process_webhook_job' => \TimoCuijpers\WebhookClient\Tests\TestClasses\ProcessWebhookJobTestClass::class,
         'store_headers' => [],
     ]);
 });

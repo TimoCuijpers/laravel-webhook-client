@@ -1,5 +1,5 @@
 {
-    "name": "spatie/laravel-webhook-client",
+    "name": "timocuijpers/laravel-webhook-client",
     "description": "Receive webhooks in Laravel apps",
     "license": "MIT",
     "keywords": [
@@ -14,7 +14,7 @@
             "role": "Developer"
         }
     ],
-    "homepage": "https://github.com/spatie/laravel-webhook-client",
+    "homepage": "https://github.com/timocuijpers/laravel-webhook-client",
     "require": {
         "php": "^8.1 || ^8.2",
         "illuminate/bus": "^9.0 || ^10.0 || ^11.0 || ^12.0",
@@ -37,16 +37,17 @@
     "prefer-stable": true,
     "autoload": {
         "psr-4": {
-            "Spatie\\WebhookClient\\": "src"
+            "TimoCuijpers\\WebhookClient\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Spatie\\WebhookClient\\Tests\\": "tests"
+            "TimoCuijpers\\WebhookClient\\Tests\\": "tests"
         }
     },
     "config": {
         "allow-plugins": {
+            "pestphp/pest-plugin": true,
             "phpstan/extension-installer": true
         },
         "sort-packages": true
@@ -57,14 +58,14 @@
         },
         "laravel": {
             "providers": [
-                "Spatie\\WebhookClient\\WebhookClientServiceProvider"
+                "TimoCuijpers\\WebhookClient\\WebhookClientServiceProvider"
             ]
         }
     },
     "scripts": {
         "analyse": "vendor/bin/phpstan analyse",
         "psalm": "vendor/bin/psalm",
-        "test": "vendor/bin/phpunit",
-        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+        "test": "vendor/bin/pest",
+        "test-coverage": "vendor/bin/pest --coverage-html coverage"
     }
 }

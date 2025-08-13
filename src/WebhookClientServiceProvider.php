@@ -1,13 +1,13 @@
 <?php
 
-namespace Spatie\WebhookClient;
+namespace TimoCuijpers\WebhookClient;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Spatie\WebhookClient\Exceptions\InvalidConfig;
-use Spatie\WebhookClient\Exceptions\InvalidMethod;
+use TimoCuijpers\WebhookClient\Exceptions\InvalidConfig;
+use TimoCuijpers\WebhookClient\Exceptions\InvalidMethod;
 
 class WebhookClientServiceProvider extends PackageServiceProvider
 {
@@ -30,7 +30,7 @@ class WebhookClientServiceProvider extends PackageServiceProvider
                 $name .= '.' . Str::random(8);
             }
 
-            return Route::{$method}($url, '\Spatie\WebhookClient\Http\Controllers\WebhookController')
+            return Route::{$method}($url, '\TimoCuijpers\WebhookClient\Http\Controllers\WebhookController')
                 ->name("webhook-client-{$name}");
         });
     }

@@ -1,10 +1,10 @@
 <?php
 
-namespace Spatie\WebhookClient\SignatureValidator;
+namespace TimoCuijpers\WebhookClient\SignatureValidator;
 
 use Illuminate\Http\Request;
-use Spatie\WebhookClient\Exceptions\InvalidConfig;
-use Spatie\WebhookClient\WebhookConfig;
+use TimoCuijpers\WebhookClient\Exceptions\InvalidConfig;
+use TimoCuijpers\WebhookClient\WebhookConfig;
 
 class DefaultSignatureValidator implements SignatureValidator
 {

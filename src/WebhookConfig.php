@@ -1,13 +1,13 @@
 <?php
 
-namespace Spatie\WebhookClient;
+namespace TimoCuijpers\WebhookClient;
 
-use Spatie\WebhookClient\Exceptions\InvalidConfig;
-use Spatie\WebhookClient\Jobs\ProcessWebhookJob;
-use Spatie\WebhookClient\SignatureValidator\SignatureValidator;
-use Spatie\WebhookClient\WebhookProfile\WebhookProfile;
-use Spatie\WebhookClient\WebhookResponse\DefaultRespondsTo;
-use Spatie\WebhookClient\WebhookResponse\RespondsToWebhook;
+use TimoCuijpers\WebhookClient\Exceptions\InvalidConfig;
+use TimoCuijpers\WebhookClient\Jobs\ProcessWebhookJob;
+use TimoCuijpers\WebhookClient\SignatureValidator\SignatureValidator;
+use TimoCuijpers\WebhookClient\WebhookProfile\WebhookProfile;
+use TimoCuijpers\WebhookClient\WebhookResponse\DefaultRespondsTo;
+use TimoCuijpers\WebhookClient\WebhookResponse\RespondsToWebhook;
 
 class WebhookConfig
 {
@@ -28,6 +28,8 @@ class WebhookConfig
     public array | string $storeHeaders;
 
     public string $processWebhookJobClass;
+
+    public string $webhookRelatedModel;
 
     public function __construct(array $properties)
     {
@@ -62,5 +64,7 @@ class WebhookConfig
         }
 
         $this->processWebhookJobClass = $properties['process_webhook_job'];
+
+        $this->webhookRelatedModel = $properties['webhook_related_model'] ?? '';
     }
 }

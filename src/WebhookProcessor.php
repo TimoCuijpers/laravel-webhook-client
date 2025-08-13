@@ -1,12 +1,12 @@
 <?php
 
-namespace Spatie\WebhookClient;
+namespace TimoCuijpers\WebhookClient;
 
 use Exception;
 use Illuminate\Http\Request;
-use Spatie\WebhookClient\Events\InvalidWebhookSignatureEvent;
-use Spatie\WebhookClient\Exceptions\InvalidWebhookSignature;
-use Spatie\WebhookClient\Models\WebhookCall;
+use TimoCuijpers\WebhookClient\Events\InvalidWebhookSignatureEvent;
+use TimoCuijpers\WebhookClient\Exceptions\InvalidWebhookSignature;
+use TimoCuijpers\WebhookClient\Models\WebhookCall;
 use Symfony\Component\HttpFoundation\Response;
 
 class WebhookProcessor

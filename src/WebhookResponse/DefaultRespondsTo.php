@@ -1,9 +1,9 @@
 <?php
 
-namespace Spatie\WebhookClient\WebhookResponse;
+namespace TimoCuijpers\WebhookClient\WebhookResponse;
 
 use Illuminate\Http\Request;
-use Spatie\WebhookClient\WebhookConfig;
+use TimoCuijpers\WebhookClient\WebhookConfig;
 use Symfony\Component\HttpFoundation\Response;
 
 class DefaultRespondsTo implements RespondsToWebhook

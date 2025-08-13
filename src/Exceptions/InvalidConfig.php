@@ -1,12 +1,12 @@
 <?php
 
-namespace Spatie\WebhookClient\Exceptions;
+namespace TimoCuijpers\WebhookClient\Exceptions;
 
 use Exception;
-use Spatie\WebhookClient\Jobs\ProcessWebhookJob;
-use Spatie\WebhookClient\SignatureValidator\SignatureValidator;
-use Spatie\WebhookClient\WebhookProfile\WebhookProfile;
-use Spatie\WebhookClient\WebhookResponse\RespondsToWebhook;
+use TimoCuijpers\WebhookClient\Jobs\ProcessWebhookJob;
+use TimoCuijpers\WebhookClient\SignatureValidator\SignatureValidator;
+use TimoCuijpers\WebhookClient\WebhookProfile\WebhookProfile;
+use TimoCuijpers\WebhookClient\WebhookResponse\RespondsToWebhook;
 
 class InvalidConfig extends Exception
 {

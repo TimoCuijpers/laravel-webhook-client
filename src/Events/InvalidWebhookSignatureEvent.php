@@ -1,9 +1,9 @@
 <?php
 
-namespace Spatie\WebhookClient\Events;
+namespace TimoCuijpers\WebhookClient\Events;
 
 use Illuminate\Http\Request;
-use Spatie\WebhookClient\WebhookConfig;
+use TimoCuijpers\WebhookClient\WebhookConfig;
 
 class InvalidWebhookSignatureEvent
 {

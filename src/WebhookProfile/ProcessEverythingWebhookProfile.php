@@ -1,6 +1,6 @@
 <?php
 
-namespace Spatie\WebhookClient\WebhookProfile;
+namespace TimoCuijpers\WebhookClient\WebhookProfile;
 
 use Illuminate\Http\Request;
 

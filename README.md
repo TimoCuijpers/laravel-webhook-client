@@ -41,7 +41,7 @@ composer require spatie/laravel-webhook-client
 You can publish the config file with:
 
 ```bash
-php artisan vendor:publish --provider="Spatie\WebhookClient\WebhookClientServiceProvider" --tag="webhook-client-config"
+php artisan vendor:publish --provider="TimoCuijpers\WebhookClient\WebhookClientServiceProvider" --tag="webhook-client-config"
 ```
 
 This is the contents of the file that will be published at `config/webhook-client.php`:
@@ -72,25 +72,25 @@ return [
             /*
              *  This class will verify that the content of the signature header is valid.
              *
-             * It should implement \Spatie\WebhookClient\SignatureValidator\SignatureValidator
+             * It should implement \TimoCuijpers\WebhookClient\SignatureValidator\SignatureValidator
              */
-            'signature_validator' => \Spatie\WebhookClient\SignatureValidator\DefaultSignatureValidator::class,
+            'signature_validator' => \TimoCuijpers\WebhookClient\SignatureValidator\DefaultSignatureValidator::class,
 
             /*
              * This class determines if the webhook call should be stored and processed.
              */
-            'webhook_profile' => \Spatie\WebhookClient\WebhookProfile\ProcessEverythingWebhookProfile::class,
+            'webhook_profile' => \TimoCuijpers\WebhookClient\WebhookProfile\ProcessEverythingWebhookProfile::class,
 
             /*
              * This class determines the response on a valid webhook call.
              */
-            'webhook_response' => \Spatie\WebhookClient\WebhookResponse\DefaultRespondsTo::class,
+            'webhook_response' => \TimoCuijpers\WebhookClient\WebhookResponse\DefaultRespondsTo::class,
 
             /*
              * The classname of the model to be used to store webhook calls. The class should
-             * be equal or extend Spatie\WebhookClient\Models\WebhookCall.
+             * be equal or extend TimoCuijpers\WebhookClient\Models\WebhookCall.
              */
-            'webhook_model' => \Spatie\WebhookClient\Models\WebhookCall::class,
+            'webhook_model' => \TimoCuijpers\WebhookClient\Models\WebhookCall::class,
 
             /*
              * In this array, you can pass the headers that should be stored on
@@ -105,7 +105,7 @@ return [
             /*
              * The class name of the job that will process the webhook request.
              *
-             * This should be set to a class that extends \Spatie\WebhookClient\Jobs\ProcessWebhookJob.
+             * This should be set to a class that extends \TimoCuijpers\WebhookClient\Jobs\ProcessWebhookJob.
              */
             'process_webhook_job' => '',
         ],
@@ -122,7 +122,7 @@ return [
 
 In the `signing_secret` key of the config file, you should add a valid webhook secret. This value should be provided by the app that will send you webhooks.
 
-This package will try to store and respond to the webhook as fast as possible. Processing the payload of the request is done via a queued job.  It's recommended to not use the `sync` driver but a real queue driver. You should specify the job that will handle processing webhook requests in the `process_webhook_job` of the config file. A valid job is any class that extends `Spatie\WebhookClient\Jobs\ProcessWebhookJob` and has a `handle` method.
+This package will try to store and respond to the webhook as fast as possible. Processing the payload of the request is done via a queued job.  It's recommended to not use the `sync` driver but a real queue driver. You should specify the job that will handle processing webhook requests in the `process_webhook_job` of the config file. A valid job is any class that extends `TimoCuijpers\WebhookClient\Jobs\ProcessWebhookJob` and has a `handle` method.
 
 ### Preparing the database
 
@@ -130,7 +130,7 @@ By default, all webhook calls will get saved in the database.
 
 To create the table that holds the webhook calls, you must publish the migration with:
 ```bash
-php artisan vendor:publish --provider="Spatie\WebhookClient\WebhookClientServiceProvider" --tag="webhook-client-migrations"
+php artisan vendor:publish --provider="TimoCuijpers\WebhookClient\WebhookClientServiceProvider" --tag="webhook-client-migrations"
 ```
 
 After the migration has been published, you can create the `webhook_calls` table by running the migrations:
@@ -196,11 +196,11 @@ If the `$computedSignature` does match the value, the request will be [passed to
 
 ### Creating your own signature validator
 
-A signature validator is any class that implements `Spatie\WebhookClient\SignatureValidator\SignatureValidator`. Here's what that interface looks like.
+A signature validator is any class that implements `TimoCuijpers\WebhookClient\SignatureValidator\SignatureValidator`. Here's what that interface looks like.
 
 ```php
 use Illuminate\Http\Request;
-use Spatie\WebhookClient\WebhookConfig;
+use TimoCuijpers\WebhookClient\WebhookConfig;
 
 interface SignatureValidator
 {
@@ -216,14 +216,14 @@ After creating your own `SignatureValidator` you must register it in the `signat
 
 After the signature of an incoming webhook request is validated, the request will be passed to a webhook profile. A webhook profile is a class that determines if the request should be stored and processed. If the webhook sending app sends out request where your app isn't interested in, you can use this class to filter out such events.
 
-By default the `\Spatie\WebhookClient\WebhookProfile\ProcessEverythingWebhookProfile` class is used. As its name implies, this default class will determine that all incoming requests should be stored and processed.
+By default the `\TimoCuijpers\WebhookClient\WebhookProfile\ProcessEverythingWebhookProfile` class is used. As its name implies, this default class will determine that all incoming requests should be stored and processed.
 
 ### Creating your own webhook profile
 
-A webhook profile is any class that implements `\Spatie\WebhookClient\WebhookProfile\WebhookProfile`. This is what that interface looks like:
+A webhook profile is any class that implements `\TimoCuijpers\WebhookClient\WebhookProfile\WebhookProfile`. This is what that interface looks like:
 
 ```php
-namespace Spatie\WebhookClient\WebhookProfile;
+namespace TimoCuijpers\WebhookClient\WebhookProfile;
 
 use Illuminate\Http\Request;
 
@@ -241,16 +241,16 @@ After the signature is validated and the webhook profile has determined that the
 
 The request will first be stored in the `webhook_calls` table. This is done using the `WebhookCall` model.
 
-Should you want to customize the table name or anything about the storage behavior, you can let the package use an alternative model. A webhook storing model can be specified in the `webhook_model`. Make sure your model extends `Spatie\WebhookClient\Models\WebhookCall`.
+Should you want to customize the table name or anything about the storage behavior, you can let the package use an alternative model. A webhook storing model can be specified in the `webhook_model`. Make sure your model extends `TimoCuijpers\WebhookClient\Models\WebhookCall`.
 
 You can change how the webhook is stored by overriding the `storeWebhook` method of `WebhookCall`. In the `storeWebhook` method you should return a saved model.
 
-Next, the newly created `WebhookCall` model will be passed to a queued job that will process the request. Any class that extends `\Spatie\WebhookClient\Jobs\ProcessWebhookJob` is a valid job. Here's an example:
+Next, the newly created `WebhookCall` model will be passed to a queued job that will process the request. Any class that extends `\TimoCuijpers\WebhookClient\Jobs\ProcessWebhookJob` is a valid job. Here's an example:
 
 ```php
 namespace App\Jobs;
 
-use Spatie\WebhookClient\Jobs\ProcessWebhookJob as SpatieProcessWebhookJob;
+use TimoCuijpers\WebhookClient\Jobs\ProcessWebhookJob as SpatieProcessWebhookJob;
 
 class ProcessWebhookJob extends SpatieProcessWebhookJob
 {
@@ -267,13 +267,13 @@ You should specify the class name of your job in the `process_webhook_job` of th
 
 ### Creating your own webhook response
 
-A webhook response is any class that implements `\Spatie\WebhookClient\WebhookResponse\RespondsToWebhook`. This is what that interface looks like:
+A webhook response is any class that implements `\TimoCuijpers\WebhookClient\WebhookResponse\RespondsToWebhook`. This is what that interface looks like:
 
 ```php
-namespace Spatie\WebhookClient\WebhookResponse;
+namespace TimoCuijpers\WebhookClient\WebhookResponse;
 
 use Illuminate\Http\Request;
-use Spatie\WebhookClient\WebhookConfig;
+use TimoCuijpers\WebhookClient\WebhookConfig;
 
 interface RespondsToWebhook
 {
@@ -294,20 +294,20 @@ return [
             'name' => 'webhook-sending-app-1',
             'signing_secret' => 'secret-for-webhook-sending-app-1',
             'signature_header_name' => 'Signature-for-app-1',
-            'signature_validator' => \Spatie\WebhookClient\SignatureValidator\DefaultSignatureValidator::class,
-            'webhook_profile' => \Spatie\WebhookClient\WebhookProfile\ProcessEverythingWebhookProfile::class,
-            'webhook_response' => \Spatie\WebhookClient\WebhookResponse\DefaultRespondsTo::class,
-            'webhook_model' => \Spatie\WebhookClient\Models\WebhookCall::class,
+            'signature_validator' => \TimoCuijpers\WebhookClient\SignatureValidator\DefaultSignatureValidator::class,
+            'webhook_profile' => \TimoCuijpers\WebhookClient\WebhookProfile\ProcessEverythingWebhookProfile::class,
+            'webhook_response' => \TimoCuijpers\WebhookClient\WebhookResponse\DefaultRespondsTo::class,
+            'webhook_model' => \TimoCuijpers\WebhookClient\Models\WebhookCall::class,
             'process_webhook_job' => '',
         ],
         [
             'name' => 'webhook-sending-app-2',
             'signing_secret' => 'secret-for-webhook-sending-app-2',
             'signature_header_name' => 'Signature-for-app-2',
-            'signature_validator' => \Spatie\WebhookClient\SignatureValidator\DefaultSignatureValidator::class,
-            'webhook_profile' => \Spatie\WebhookClient\WebhookProfile\ProcessEverythingWebhookProfile::class,
-            'webhook_response' => \Spatie\WebhookClient\WebhookResponse\DefaultRespondsTo::class,
-            'webhook_model' => \Spatie\WebhookClient\Models\WebhookCall::class,
+            'signature_validator' => \TimoCuijpers\WebhookClient\SignatureValidator\DefaultSignatureValidator::class,
+            'webhook_profile' => \TimoCuijpers\WebhookClient\WebhookProfile\ProcessEverythingWebhookProfile::class,
+            'webhook_response' => \TimoCuijpers\WebhookClient\WebhookResponse\DefaultRespondsTo::class,
+            'webhook_model' => \TimoCuijpers\WebhookClient\Models\WebhookCall::class,
             'process_webhook_job' => '',
         ],
     ],
@@ -334,23 +334,23 @@ Route::webhooks('receiving-url-for-app-1', 'webhook-sending-app-1', 'delete');
 
 If you don't want to use the routes and controller provided by your macro, you can programmatically add support for webhooks to your own controller.
 
-`Spatie\WebhookClient\WebhookProcessor` is a class that verifies the signature, calls the web profile, stores the webhook request, and starts a queued job to process the stored webhook request. The controller provided by this package also uses that class [under the hood](https://github.com/spatie/laravel-webhook-client/blob/2172f79eda7d6f86a01554be9b444b9e31343610/src/WebhookController.php#L11).
+`TimoCuijpers\WebhookClient\WebhookProcessor` is a class that verifies the signature, calls the web profile, stores the webhook request, and starts a queued job to process the stored webhook request. The controller provided by this package also uses that class [under the hood](https://github.com/spatie/laravel-webhook-client/blob/2172f79eda7d6f86a01554be9b444b9e31343610/src/WebhookController.php#L11).
 
 It can be used like this:
 
 ```php
-$webhookConfig = new \Spatie\WebhookClient\WebhookConfig([
+$webhookConfig = new \TimoCuijpers\WebhookClient\WebhookConfig([
     'name' => 'webhook-sending-app-1',
     'signing_secret' => 'secret-for-webhook-sending-app-1',
     'signature_header_name' => 'Signature',
-    'signature_validator' => \Spatie\WebhookClient\SignatureValidator\DefaultSignatureValidator::class,
-    'webhook_profile' => \Spatie\WebhookClient\WebhookProfile\ProcessEverythingWebhookProfile::class,
-    'webhook_response' => \Spatie\WebhookClient\WebhookResponse\DefaultRespondsTo::class,
-    'webhook_model' => \Spatie\WebhookClient\Models\WebhookCall::class,
+    'signature_validator' => \TimoCuijpers\WebhookClient\SignatureValidator\DefaultSignatureValidator::class,
+    'webhook_profile' => \TimoCuijpers\WebhookClient\WebhookProfile\ProcessEverythingWebhookProfile::class,
+    'webhook_response' => \TimoCuijpers\WebhookClient\WebhookResponse\DefaultRespondsTo::class,
+    'webhook_model' => \TimoCuijpers\WebhookClient\Models\WebhookCall::class,
     'process_webhook_job' => '',
 ]);
 
-(new \Spatie\WebhookClient\WebhookProcessor($request, $webhookConfig))->process();
+(new \TimoCuijpers\WebhookClient\WebhookProcessor($request, $webhookConfig))->process();
 ```
 
 ### Deleting models
@@ -377,7 +377,7 @@ You are free to choose the appropriate interval at which this command should be 
 
 ```php
 use Illuminate\Support\Facades\Schedule;
-use Spatie\WebhookClient\Models\WebhookCall;
+use TimoCuijpers\WebhookClient\Models\WebhookCall;
 
 Schedule::command('model:prune', [
     '--model' => [WebhookCall::class],

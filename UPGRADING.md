@@ -47,8 +47,8 @@ class AddColumnsToWebhookCalls extends Migration
 
 - add a key `store_headers` to each entry in `configs` of the `webhook-client` config file. See the default config file for an example.
 
-- the `Spatie\WebhookClient\Events\InvalidSignature` event has been renamed to `Spatie\WebhookClient\Events\InvalidWebhookSignatureEvent`
+- the `TimoCuijpers\WebhookClient\Events\InvalidSignature` event has been renamed to `TimoCuijpers\WebhookClient\Events\InvalidWebhookSignatureEvent`
 
-- the `Spatie\WebhookClient\ProcessWebhookJob` job has been moved to `Spatie\WebhookClient\Jobs\ProcessWebhookJob`
+- the `TimoCuijpers\WebhookClient\ProcessWebhookJob` job has been moved to `TimoCuijpers\WebhookClient\Jobs\ProcessWebhookJob`
 
-- the `Spatie\WebhookClient\Events\InvalidWebhookSignatureEvent` event get the `Spatie\WebhookClient\WebhookConfig` as parameter
+- the `TimoCuijpers\WebhookClient\Events\InvalidWebhookSignatureEvent` event get the `TimoCuijpers\WebhookClient\WebhookConfig` as parameter
