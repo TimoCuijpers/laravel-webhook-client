@@ -6,6 +6,7 @@ use Exception;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\MassPrunable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Http\Request;
 use TimoCuijpers\WebhookClient\Exceptions\InvalidConfig;
 use TimoCuijpers\WebhookClient\WebhookConfig;
@@ -36,7 +37,7 @@ use Symfony\Component\HttpFoundation\HeaderBag;
  */
 class WebhookCall extends Model
 {
-    use MassPrunable;
+    use MassPrunable, SoftDeletes;
 
     public $guarded = [];
 
